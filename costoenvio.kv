@@ -1,0 +1,50 @@
+#:kivy 2.3.0
+
+<MainScreen>:
+    canvas.before:
+        Color:
+            rgba: .9, .9, .9, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 5
+        spacing: 5
+        RV:
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: 1,.09
+            spacing: 5
+            TextInput:
+                id:searchbar
+                multiline: False
+                background_normal: ''
+                cursor_color: .2,.2,.2,1
+                foreground_color: .2,.2,.2,1
+                hint_text:'Search for an address'
+                on_text: root.query()
+            Button:
+                text: 'Search'
+                size_hint:.3,1
+                color: .2,.2,.2,1
+                background_normal: ''
+                background_color: .8,.8,.8,1
+
+<RV>:
+    viewclass: 'CustomLabel'
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    RecycleBoxLayout:
+        default_size: None, dp(20)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+<CustomLabel@Label>:
+    color: .2,.2,.2,1
