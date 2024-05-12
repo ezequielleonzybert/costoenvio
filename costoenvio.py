@@ -16,25 +16,28 @@ class RV(RecycleView):
         if locations:
             for location in locations:
                 self.data.append({'text': str(location)})
+                # print(location.raw)
+                print(location.point)
 
-class MainWidget(Widget):
+class MainWidget(Widget): 
+
     async def query(self):
-        query = self.ids.searchbar.text
+        query = self.ids.searchbar.text 
         async with Nominatim(
             user_agent="costoenvio",
             adapter_factory=AioHTTPAdapter,
             timeout=3
         ) as geolocator:
             locations = await geolocator.geocode(query, exactly_one=False, country_codes='AR')
-            print(locations)
             self.ids.rv.set_data(locations)
             
     def awaitquery(self):
-        asyncio.run(self.query())
+        asyncio.create_task(self.query())
 
 class CostoEnvioApp(App):
-    title='Shipping cost'    
+    title='Shipping cost'
     def build(self):
         return MainWidget()
 
-CostoEnvioApp().run()
+# CostoEnvioApp().run()
+asyncio.run(CostoEnvioApp().async_run('asyncio'))

@@ -24,13 +24,14 @@
                 cursor_color: .2,.2,.2,1
                 foreground_color: .2,.2,.2,1
                 hint_text:'Search for an address'
-                on_text: root.awaitquery()
+                on_text_validate: root.awaitquery()
             Button:
                 text: 'Search'
                 size_hint:.3,1
                 color: .2,.2,.2,1
                 background_normal: ''
                 background_color: .8,.8,.8,1
+                on_press: root.awaitquery()
 
 <RV>:
     viewclass: 'CustomButton'
